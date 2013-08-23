@@ -1,8 +1,8 @@
 {
   "name": "layer-cake",
-  "description": "Little node.js Web Framework care of your friends at DBLayer/MongoHQ",
+  "description": "Little node.js Web Framework care of your friends at MongoHQ",
   "version": "0.0.1",
-  "homepage": "https://github.com/mattinsler/awesomebox-cli",
+  "homepage": "https://github.com/MongoHQ/layer-cake",
   "author": {
     "name": "Matt Insler",
     "email": "matt.insler@gmail.com",

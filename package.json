@@ -1,6 +1,6 @@
 {
   "name": "layer-cake",
-  "description": "Little node.js Web Framework care of your friends at MongoHQ",
+  "description": "A little node.js web framework care of your friends at MongoHQ",
   "version": "0.0.1",
   "homepage": "https://github.com/MongoHQ/layer-cake",
   "author": {

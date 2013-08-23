@@ -1,5 +1,6 @@
 fs = require 'fs'
 path = require 'path'
+chalk = require 'chalk'
 
 find_root = (dir) ->
   try
@@ -25,9 +26,8 @@ exports.server = (cb) ->
 
   app.listen (err, addr) =>
     return console.log(err.stack) if err?
-    @log('')
-    @log "Your server is now listening on port #{addr.port}"
+    
+    @log "Your server is now listening on port #{chalk.cyan(addr.port)}"
     @log('')
   
-  process.on 'exit', =>
-    cb()
+  process.on 'exit', -> cb()

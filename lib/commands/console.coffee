@@ -23,26 +23,49 @@ goodbye = [
   'Next time wipe your feet'
 ]
 
-exports.console = (server, cb) ->
-  if typeof server is 'function'
-    cb = server
-    server = null
+start_repl = (ws, server, callback) ->
+  @log(line) for line in welcome(server).split('\n')
+  @log()
   
-  return cb(new Error('Usage: console [server]      # like localhost:3000')) unless server?
-  
-  ws = new WebSocket.Client 'ws://' + server + '/__layers_console__'
-
   process.stdin.setRawMode(true)
   ws.pipe(process.stdout)
+  process.stdin.resume()
   process.stdin.pipe(ws)
-  
-  ws.on 'open', =>
-    @log(line) for line in welcome(server).split('\n')
-    @log()
   
   ws.on 'close', =>
     @log()
     @log goodbye[parseInt(4 * Math.random())]
     @log()
     process.exit()
-    cb()
+    callback()
+
+exports.console = (server, callback) ->
+  if typeof server is 'function'
+    callback = server
+    server = null
+  
+  return callback(new Error('Usage: console [server]      # like localhost:3000')) unless server?
+  
+  ws = new WebSocket.Client('ws://' + server + '/__layers_console__')
+  
+  get_creds = (cb) =>
+    @prompt.get(
+      properties:
+        username:
+          required: true
+        password:
+          required: true
+          hidden: true
+    , cb)
+  
+  on_message = (msg) =>
+    switch msg.data.toString()
+      when 'OK'
+        ws.removeListener('message', on_message)
+        start_repl.call(@, ws, server, callback)
+      when 'AUTHENTICATE'
+        get_creds (err, data) ->
+          return callback(err) if err?
+          ws.send(new Buffer(data.username + data.password).toString('base64'))
+  
+  ws.on('message', on_message)

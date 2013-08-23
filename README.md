@@ -15,7 +15,7 @@ $ npm install --save layer-cake
 
 ### Command-Line
 
-![layer-cake command line image](http://screencast.com/t/MHFGrrIIc)
+![layer-cake command line image](http://content.screencast.com/users/racobac/folders/Jing/media/c5677722-5fae-49de-bf74-6ab510a49e6a/00000077.png)
 
 ### Expected Directory Structure
 

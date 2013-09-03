@@ -1,5 +1,4 @@
 chalk = require 'chalk'
-WebSocket = require 'faye-websocket'
 
 welcome = (server) -> """
 You're connected to #{chalk.cyan(server)}! Take a look around!
@@ -39,14 +38,15 @@ start_repl = (ws, server, callback) ->
     process.exit()
     callback()
 
-exports.console = (server, callback) ->
-  if typeof server is 'function'
-    callback = server
-    server = null
+remote_console = (server, callback) ->
+  WebSocket = require 'faye-websocket'
   
-  return callback(new Error('Usage: console [server]      # like localhost:3000')) unless server?
-  
-  ws = new WebSocket.Client('ws://' + server + '/__layers_console__')
+  ws = new WebSocket.Client('ws://' + server + '/__layer-cake_console__')
+  was_opened = false
+  ws.on 'open', -> was_opened = true
+  ws.on 'close', ->
+    return callback(new Error('Could not connect to ' + server)) if was_opened is false
+    callback()
   
   get_creds = (cb) =>
     @prompt.get(
@@ -69,3 +69,23 @@ exports.console = (server, callback) ->
           ws.send(new Buffer(data.username + data.password).toString('base64'))
   
   ws.on('message', on_message)
+
+local_console = (callback) ->
+  app = @create_app()
+  
+  prompt = require(require('path').join(app.path.root, 'package.json')).name or 'layer-cake'
+  
+  app.initialize 'init', (err) ->
+    return callback(err) if err?
+  
+    repl = require('repl').start(
+      prompt: prompt + '> '
+    )
+    repl.context.app = app
+    repl.context.$_ = -> console.log(arguments)
+
+    repl.on 'exit', -> callback()
+
+exports.console = (server, callback) ->
+  return local_console.call(@, server) if typeof server is 'function'
+  remote_console.call(@, server, callback)

@@ -1,6 +1,8 @@
 chalk = require 'chalk'
 
 exports.help = (cb) ->
+  app = @create_app()
+  
   @logger.help chalk.underline('Commands')
   @logger.help('')
   @logger.help chalk.cyan('layer-cake console [address]')

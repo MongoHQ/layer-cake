@@ -33,10 +33,11 @@
     "express": "~3.3.5",
     "async": "~0.2.9",
     "faye-websocket": "~0.6.1",
-    "nopt": "~2.1.2",
     "chalk": "~0.2.0",
     "winston": "~0.7.2",
-    "prompt": "~0.2.11"
+    "commandment": "0.0.1",
+    "configyour": "0.0.1",
+    "underscore": "~1.5.1"
   },
   "devDependencies": {},
   "keywords": []

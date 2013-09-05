@@ -21,7 +21,7 @@
       "url": "https://github.com/MongoHQ/layer-cake/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "lib/layer-cake.coffee",
+  "main": "layer-cake.js",
   "bin": {
     "layer-cake": "./bin/layer-cake"
   },

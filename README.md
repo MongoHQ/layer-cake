@@ -10,7 +10,7 @@ application, while adding some nice features to make your life easier.
 ## Installation
 
 ```sh
-$ npm install --save layer-cake
+$ npm install -g layer-cake
 ```
 
 ## Usage

@@ -21,6 +21,6 @@ module.exports = (app) ->
   app.path.controllers = path.join(app.path.app, 'controllers')
   
   app.sequence('http').insert(
-    'controllers', controllers,
+    'controllers', controllers.bind(app),
     after: 'middleware'
   )

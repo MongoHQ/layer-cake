@@ -1,4 +1,8 @@
 #!/usr/bin/env node
 
 require('coffee-script');
-require('../lib/cli');
+var LayerCake = require('../lib/layer-cake').LayerCake
+  , app = new LayerCake(process.cwd());
+
+app.load_plugins();
+app.commandline.execute(process.argv);

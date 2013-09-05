@@ -3,9 +3,9 @@ listen = (callback) ->
   @http = @express.listen(port, callback)
 
 module.exports = (app) ->
-  app.sequence('http').depends_on('init').add('listen', listen)
+  app.sequence('http').depends_on('init').add('listen', listen.bind(app))
   
   app.listen = (callback) ->
-    @initialize 'http', (err) =>
+    @execute 'http', (err) =>
       return callback?(err) if err?
       callback?(null, @http.address())

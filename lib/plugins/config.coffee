@@ -10,6 +10,6 @@ module.exports = (app) ->
   app.path.config = path.join(app.path.root, 'config')
   
   app.sequence('init').insert(
-    'config', config
+    'config', config.bind(app)
     after: '*'
   )

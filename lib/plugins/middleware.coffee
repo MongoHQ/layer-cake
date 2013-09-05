@@ -11,6 +11,6 @@ middleware = (callback) ->
 
 module.exports = (app) ->
   app.sequence('http').insert(
-    'middleware', middleware,
+    'middleware', middleware.bind(app),
     after: 'express'
   )

@@ -1,7 +1,7 @@
 {
   "name": "layer-cake",
   "description": "A little node.js web framework care of your friends at MongoHQ",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/MongoHQ/layer-cake",
   "author": {
     "name": "Matt Insler",
@@ -37,7 +37,8 @@
     "winston": "~0.7.2",
     "commandment": "0.0.1",
     "configyour": "0.0.1",
-    "underscore": "~1.5.1"
+    "underscore": "~1.5.1",
+    "sequences": "0.0.1"
   },
   "devDependencies": {},
   "keywords": []

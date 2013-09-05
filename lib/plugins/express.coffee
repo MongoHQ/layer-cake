@@ -16,6 +16,6 @@ create_express = (callback) ->
 
 module.exports = (app) ->
   app.sequence('http').insert(
-    'express', create_express,
+    'express', create_express.bind(app),
     before: '*'
   )

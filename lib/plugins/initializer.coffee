@@ -6,11 +6,11 @@ initializer_registration = (callback) ->
     initializer?(@)
     callback()
   catch err
-    return callback() if err.message.indexOf('Cannot find module') is 0
+    return callback() if err.code is 'MODULE_NOT_FOUND'
     callback(err)
 
 module.exports = (app) ->
   app.sequence('init').insert(
-    'initializer-registration', initializer_registration,
+    'initializer-registration', initializer_registration.bind(app),
     before: '*'
   )

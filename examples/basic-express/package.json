@@ -1,0 +1,13 @@
+{
+  "name": "basic-express",
+  "description": "Express HTTP server using layer-cake",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "layer-cake server"
+  },
+  "dependencies": {
+    "layer-cake": "0.0.2",
+    "ejs": "~0.8.4"
+  }
+}

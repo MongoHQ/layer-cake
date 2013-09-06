@@ -1,10 +1,7 @@
 version = ->
   chalk = require 'chalk'
   version = require('../../package.json').version
-  
-  """
-You are running layer-cake #{chalk.magenta(version)}
-  """
+  "You are running layer-cake #{chalk.magenta(version)}"
 
 command_help = (c) ->
   chalk = require 'chalk'
@@ -39,3 +36,5 @@ exports.help = (callback) ->
   
   @logger.help(line) for line in message.split('\n')
   callback()
+
+exports.help.description = 'Display the help!'

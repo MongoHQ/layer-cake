@@ -5,7 +5,7 @@ module.exports = (app) ->
   c.help = 'remote-console [address]'
   c.description = """
 Open a console to your layer-cake server.
-  address: something like localhost:3000 or api.foo.com
+  - address: something like localhost:3000 or api.foo.com
 """
 
 SERVER =

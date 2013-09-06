@@ -22,5 +22,5 @@ module.exports = (app) ->
   
   app.sequence('http').insert(
     'controllers', controllers.bind(app),
-    after: 'middleware'
+    before: 'listen'
   )

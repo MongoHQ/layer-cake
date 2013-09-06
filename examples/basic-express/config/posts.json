@@ -1,0 +1,9 @@
+[{
+  title: 'Hello World',
+  slug: 'hello-world',
+  body: "Isn't it sunny out today?"
+}, {
+  title: 'Great Post',
+  slug: 'great-post',
+  body: 'Look at how great of a post this is!'
+}]

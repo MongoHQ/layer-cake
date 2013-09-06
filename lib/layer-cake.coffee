@@ -1,4 +1,4 @@
-process.env.NODE_ENV or= 'development'
+environment = process.env.NODE_ENV ? 'development'
 
 fs = require 'path'
 path = require 'path'
@@ -14,12 +14,16 @@ class LayerCake extends Container
     require './plugins/express'
     require './plugins/middleware'
     require './plugins/controllers'
+    require './plugins/views'
+    require './plugins/models'
+    
     require './plugins/remote-console'
   ]
   
   constructor: (root) ->
     super()
-    @__defineGetter__ 'environment', -> process.env.NODE_ENV
+    
+    @environment = environment
     
     @path =
       root: root
@@ -34,7 +38,10 @@ class LayerCake extends Container
     
     for p in (@package?.plugins or [])
       try
-        p = path.join(@path.root, p) if p[0] is '.'
+        if p[0] is '.'
+          p = path.join(@path.root, p)
+        else if p[0] isnt '/'
+          p = path.join(@path.root, 'node_modules', p)
         Array::push.call(LayerCake.plugins, require(p))
       catch err
         console.log 'There was an error loading plugin ' + p

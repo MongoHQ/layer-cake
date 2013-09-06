@@ -2,6 +2,8 @@ path = require 'path'
 Commandment = require 'commandment'
 
 handle_error = (err) ->
+  console.log err.stack
+  
   text = err.body?.error
   text ?= err.body
   text ?= err.message

@@ -38,7 +38,7 @@
     "commandment": "0.0.1",
     "configyour": "0.0.1",
     "underscore": "~1.5.1",
-    "sequences": "0.0.1"
+    "sequences": "0.0.2"
   },
   "devDependencies": {},
   "keywords": []

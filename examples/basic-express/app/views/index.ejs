@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <ul>
+  <% posts.forEach(function(post) { %>
+    <li>
+      <a href="/posts/<%- post.slug %>"><%= post.title %></a>
+    </li>
+  <% }) %>
+  </ul>
+</body>
+</html>

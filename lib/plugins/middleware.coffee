@@ -6,7 +6,9 @@ middleware = (callback) ->
     middleware?(@)
     callback()
   catch err
-    return callback() if err.code is 'MODULE_NOT_FOUND'
+    if err.code is 'MODULE_NOT_FOUND' and err.message.indexOf("'#{middleware}'") isnt -1
+      console.log "You don't have any middleware (looked for #{path.join(@path.app, 'middleware')}). Are you sure you don't want any?"
+      return callback()
     callback(err)
 
 module.exports = (app) ->

@@ -4,6 +4,9 @@ fs = require 'path'
 path = require 'path'
 {Container} = require 'sequences'
 
+process.on 'uncaughtException', (err) ->
+  console.log err.stack
+
 class LayerCake extends Container
   @plugins: [
     require './plugins/commandline'

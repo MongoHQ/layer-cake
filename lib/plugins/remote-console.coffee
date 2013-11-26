@@ -21,13 +21,14 @@ SERVER =
           l(arguments...) for l in upgrade_listeners
           return
         return unless WebSocket.isWebSocket(req)
-    
+        
+        config = app.config['layer-cake']?.console
+        return socket.end() unless config?.auth?.username? and config?.auth?.password?
+        
         ws = new WebSocket(req, socket, body)
     
         ws.on 'open', ->
-          return SERVER.start_repl(ws, app) unless app.config['layer-cake']?.console?.auth?.username? and app.config['layer-cake']?.console?.auth?.password?
-      
-          {username, password} = app.config['layer-cake']?.console?.auth
+          {username, password} = config.auth
           ws.send('AUTHENTICATE')
       
           on_message = (msg) ->
